@@ -14,5 +14,6 @@ model Gasto {
   data           String
   categoria      String
   formaPagamento String
+  tag            String
   criadoEm       DateTime @default(now())
 }
