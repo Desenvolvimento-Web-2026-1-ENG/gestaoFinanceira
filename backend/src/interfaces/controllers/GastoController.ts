@@ -15,10 +15,10 @@ export class GastoController {
     private dashboardService: DashboardService
   ) {}
 
-  criar(req: Request, res: Response): void {
+  async criar(req: Request, res: Response): Promise<void> {
     try {
       const dados: CriarGastoDTO = req.body;
-      const novoGasto = this.registrarGastoService.registrar(dados);
+      const novoGasto = await this.registrarGastoService.registrar(dados);
       res.status(201).json(novoGasto);
     } catch (error: any) {
       if (error.message === 'Dados inválidos') {
@@ -32,24 +32,24 @@ export class GastoController {
     }
   }
 
-  listar(req: Request, res: Response): void {
+  async listar(req: Request, res: Response): Promise<void> {
     try {
       const filtros: FiltroGastosDTO = {
         mes: req.query.mes as string | undefined,
         ano: req.query.ano as string | undefined,
         categoria: req.query.categoria as string | undefined,
       };
-      const gastos = this.consultarGastosService.listar(filtros);
+      const gastos = await this.consultarGastosService.listar(filtros);
       res.status(200).json(gastos);
     } catch (error: any) {
       res.status(500).json({ erro: 'Erro interno do servidor ao listar gastos.' });
     }
   }
 
-  buscarPorId(req: Request, res: Response): void {
+  async buscarPorId(req: Request, res: Response): Promise<void> {
     try {
       const id = String(req.params.id || '');
-      const gasto = this.consultarGastosService.buscarPorId(id);
+      const gasto = await this.consultarGastosService.buscarPorId(id);
       res.status(200).json(gasto);
     } catch (error: any) {
       const status = error.status || 500;
@@ -57,11 +57,11 @@ export class GastoController {
     }
   }
 
-  atualizar(req: Request, res: Response): void {
+  async atualizar(req: Request, res: Response): Promise<void> {
     try {
       const id = String(req.params.id || '');
       const dados: AtualizarGastoDTO = req.body;
-      const gastoAtualizado = this.atualizarGastoService.atualizar(id, dados);
+      const gastoAtualizado = await this.atualizarGastoService.atualizar(id, dados);
       res.status(200).json(gastoAtualizado);
     } catch (error: any) {
       const status = error.status || 500;
@@ -72,10 +72,10 @@ export class GastoController {
     }
   }
 
-  excluir(req: Request, res: Response): void {
+  async excluir(req: Request, res: Response): Promise<void> {
     try {
       const id = String(req.params.id || '');
-      this.excluirGastoService.excluir(id);
+      await this.excluirGastoService.excluir(id);
       res.status(200).json({ mensagem: 'Gasto excluído com sucesso.' });
     } catch (error: any) {
       const status = error.status || 500;
@@ -83,20 +83,20 @@ export class GastoController {
     }
   }
 
-  listarCategorias(req: Request, res: Response): void {
+  async listarCategorias(req: Request, res: Response): Promise<void> {
     try {
-      const categorias = this.consultarGastosService.listarCategorias();
+      const categorias = await this.consultarGastosService.listarCategorias();
       res.status(200).json(categorias);
     } catch (error: any) {
       res.status(500).json({ erro: 'Erro interno ao listar categorias.' });
     }
   }
 
-  obterDashboard(req: Request, res: Response): void {
+  async obterDashboard(req: Request, res: Response): Promise<void> {
     try {
       const mes = req.query.mes as string | undefined;
       const ano = req.query.ano as string | undefined;
-      const resumo = this.dashboardService.obterResumo(mes, ano);
+      const resumo = await this.dashboardService.obterResumo(mes, ano);
       res.status(200).json(resumo);
     } catch (error: any) {
       res.status(500).json({ erro: 'Erro interno ao obter resumo do dashboard.' });

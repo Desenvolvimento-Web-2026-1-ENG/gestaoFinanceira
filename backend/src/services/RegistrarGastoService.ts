@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class RegistrarGastoService {
   constructor(private gastoRepository: IGastoRepository) {}
 
-  registrar(dados: CriarGastoDTO): Gasto {
+  async registrar(dados: CriarGastoDTO): Promise<Gasto> {
     const erros: string[] = [];
 
     // Validação dos campos obrigatórios
@@ -37,6 +37,10 @@ export class RegistrarGastoService {
       erros.push("O campo 'formaPagamento' é obrigatório.");
     }
 
+    if (!dados.tag || dados.tag.trim() === '') {
+      erros.push("O campo 'tag' é obrigatório.");
+    }
+
     if (erros.length > 0) {
       const error = new Error('Dados inválidos');
       (error as any).detalhes = erros;
@@ -50,9 +54,10 @@ export class RegistrarGastoService {
       data: dados.data,
       categoria: dados.categoria.trim(),
       formaPagamento: dados.formaPagamento.trim(),
+      tag: dados.tag.trim(),
       criadoEm: new Date().toISOString(),
     };
 
-    return this.gastoRepository.criar(novoGasto);
+    return await this.gastoRepository.criar(novoGasto);
   }
 }

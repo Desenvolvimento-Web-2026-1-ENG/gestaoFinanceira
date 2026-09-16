@@ -4,10 +4,11 @@ import { ConsultarGastosService } from "@services/ConsultarGastosService.js";
 import { AtualizarGastoService } from "@services/AtualizarGastoService.js";
 import { ExcluirGastoService } from "@services/ExcluirGastoService.js";
 import { DashboardService } from "@services/DashboardService.js";
-import { GastoRepositoryInMemory } from "@infrastructure/database/GastoRepositoryInMemory.js";
+import { GastoRepositoryPrisma } from "@infrastructure/database/prisma/GastoRepositoryPrisma.js";
+// import { GastoRepositoryInMemory } from "@infrastructure/database/memory/GastoRepositoryInMemory.js";
 
 export class GastoFactory {
-  private static repository = new GastoRepositoryInMemory();
+  private static repository = new GastoRepositoryPrisma();
 
   static criarController(): GastoController {
     const repo = GastoFactory.repository;

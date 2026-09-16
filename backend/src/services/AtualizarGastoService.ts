@@ -5,14 +5,14 @@ import { AtualizarGastoDTO } from './dtos/GastoDTOs.js';
 export class AtualizarGastoService {
   constructor(private gastoRepository: IGastoRepository) {}
 
-  atualizar(id: string, dados: AtualizarGastoDTO): Gasto {
+  async atualizar(id: string, dados: AtualizarGastoDTO): Promise<Gasto> {
     if (!id || id.trim() === '') {
       const error = new Error('ID do gasto é obrigatório.');
       (error as any).status = 400;
       throw error;
     }
 
-    const gastoExistente = this.gastoRepository.buscarPorId(id);
+    const gastoExistente = await this.gastoRepository.buscarPorId(id);
     if (!gastoExistente) {
       const error = new Error('Gasto não encontrado para atualização.');
       (error as any).status = 404;
@@ -52,6 +52,12 @@ export class AtualizarGastoService {
       }
     }
 
+    if (dados.tag !== undefined) {
+      if (typeof dados.tag !== 'string') {
+        erros.push("O campo 'tag' deve ser um texto.");
+      }
+    }
+
     if (erros.length > 0) {
       const error = new Error('Dados inválidos');
       (error as any).status = 400;
@@ -65,8 +71,9 @@ export class AtualizarGastoService {
     if (dados.data !== undefined) dadosLimpos.data = dados.data;
     if (dados.categoria !== undefined) dadosLimpos.categoria = dados.categoria.trim();
     if (dados.formaPagamento !== undefined) dadosLimpos.formaPagamento = dados.formaPagamento.trim();
+    if (dados.tag !== undefined) dadosLimpos.tag = dados.tag.trim();
 
-    const gastoAtualizado = this.gastoRepository.atualizar(id, dadosLimpos);
+    const gastoAtualizado = await this.gastoRepository.atualizar(id, dadosLimpos);
     if (!gastoAtualizado) {
       const error = new Error('Erro ao atualizar o gasto.');
       (error as any).status = 500;
