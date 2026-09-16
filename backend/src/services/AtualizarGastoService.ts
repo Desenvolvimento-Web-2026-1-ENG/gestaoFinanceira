@@ -52,6 +52,12 @@ export class AtualizarGastoService {
       }
     }
 
+    if (dados.tag !== undefined) {
+      if (typeof dados.tag !== 'string') {
+        erros.push("O campo 'tag' deve ser um texto.");
+      }
+    }
+
     if (erros.length > 0) {
       const error = new Error('Dados inválidos');
       (error as any).status = 400;
@@ -65,6 +71,7 @@ export class AtualizarGastoService {
     if (dados.data !== undefined) dadosLimpos.data = dados.data;
     if (dados.categoria !== undefined) dadosLimpos.categoria = dados.categoria.trim();
     if (dados.formaPagamento !== undefined) dadosLimpos.formaPagamento = dados.formaPagamento.trim();
+    if (dados.tag !== undefined) dadosLimpos.tag = dados.tag.trim();
 
     const gastoAtualizado = await this.gastoRepository.atualizar(id, dadosLimpos);
     if (!gastoAtualizado) {

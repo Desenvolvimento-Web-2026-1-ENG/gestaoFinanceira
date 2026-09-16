@@ -17,6 +17,7 @@ const GastoForm = () => {
     data: new Date().toISOString().split('T')[0],
     categoria: CATEGORIAS[0],
     formaPagamento: FORMAS_PAGAMENTO[3], // Default PIX
+    tag: '',
   });
   
   const [loading, setLoading] = useState(isEditing);
@@ -38,6 +39,7 @@ const GastoForm = () => {
         data: gasto.data,
         categoria: gasto.categoria,
         formaPagamento: gasto.formaPagamento,
+        tag: gasto.tag || '',
       });
     } catch (err) {
       setError('Gasto não encontrado.');
@@ -176,6 +178,20 @@ const GastoForm = () => {
               ))}
             </select>
           </div>
+        </div>
+
+        <div className="form-group" style={{ marginTop: '1rem' }}>
+          <label className="form-label" htmlFor="tag">Tag</label>
+          <input
+            type="text"
+            id="tag"
+            name="tag"
+            className="form-input"
+            value={formData.tag}
+            onChange={handleChange}
+            placeholder="Ex: lazer, urgente, recorrente"
+            required
+          />
         </div>
 
         <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>

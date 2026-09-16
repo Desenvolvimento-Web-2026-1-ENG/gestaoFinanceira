@@ -80,6 +80,7 @@ const GastosList = () => {
                 <th>Descrição</th>
                 <th>Categoria</th>
                 <th>Forma de Pag.</th>
+                <th>Tag</th>
                 <th style={{ textAlign: 'right' }}>Valor</th>
                 <th style={{ textAlign: 'right' }}>Ações</th>
               </tr>
@@ -91,6 +92,7 @@ const GastosList = () => {
                   <td style={{ fontWeight: 500 }}>{gasto.descricao}</td>
                   <td><span className="badge" style={{ backgroundColor: '#e2e8f0', color: '#475569' }}>{gasto.categoria}</span></td>
                   <td>{gasto.formaPagamento}</td>
+                  <td>{gasto.tag ? <span className="badge" style={{ backgroundColor: '#f1f5f9', color: '#64748b' }}>#{gasto.tag}</span> : '-'}</td>
                   <td style={{ textAlign: 'right', fontWeight: 600, color: 'var(--danger)' }}>
                     {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(gasto.valor)}
                   </td>

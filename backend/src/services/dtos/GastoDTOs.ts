@@ -4,6 +4,7 @@ export interface CriarGastoDTO {
   data: string;
   categoria: string;
   formaPagamento: string;
+  tag: string;
 }
 
 export interface AtualizarGastoDTO {
@@ -12,6 +13,7 @@ export interface AtualizarGastoDTO {
   data?: string | undefined;
   categoria?: string | undefined;
   formaPagamento?: string | undefined;
+  tag?: string | undefined;
 }
 
 export interface FiltroGastosDTO {

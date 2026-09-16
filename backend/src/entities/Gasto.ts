@@ -5,5 +5,6 @@ export interface Gasto {
   data: string;
   categoria: string;
   formaPagamento: string;
+  tag: string;
   criadoEm: string;
 }

@@ -12,6 +12,7 @@ export class GastoRepositoryPrisma implements IGastoRepository {
         data: gasto.data,
         categoria: gasto.categoria,
         formaPagamento: gasto.formaPagamento,
+        tag: gasto.tag,
         criadoEm: new Date(gasto.criadoEm),
       },
     });
@@ -63,6 +64,7 @@ export class GastoRepositoryPrisma implements IGastoRepository {
           ...(dados.data !== undefined && { data: dados.data }),
           ...(dados.categoria !== undefined && { categoria: dados.categoria }),
           ...(dados.formaPagamento !== undefined && { formaPagamento: dados.formaPagamento }),
+          ...(dados.tag !== undefined && { tag: dados.tag }),
         },
       });
 
