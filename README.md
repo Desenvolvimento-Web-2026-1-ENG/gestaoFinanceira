@@ -160,7 +160,7 @@ Abaixo estão os endpoints disponíveis no Back-end (`http://localhost:3000/api/
 ## 📱 8. Wireframes
 
 A interface React.js foi desenvolvida com base nos Wireframes iniciais do projeto. A documentação completa e o relacionamento tela-endpoint estão registrados no documento:
-👉 **[`docs/WIREFRAMES.md`](./docs/WIREFRAMES.md)**
+👉 **[`docs/WIREFRAMES.md`]([./docs/WIREFRAMES.md](https://github.com/Desenvolvimento-Web-2026-1-ENG/gestaoFinanceira/tree/main/docs/WIreframes))**
 
 ---
 
