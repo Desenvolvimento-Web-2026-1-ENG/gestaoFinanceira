@@ -5,18 +5,18 @@ import { FiltroGastosDTO } from './dtos/GastoDTOs.js';
 export class ConsultarGastosService {
   constructor(private gastoRepository: IGastoRepository) {}
 
-  listar(filtros?: FiltroGastosDTO): Gasto[] {
-    return this.gastoRepository.listar(filtros);
+  async listar(filtros?: FiltroGastosDTO): Promise<Gasto[]> {
+    return await this.gastoRepository.listar(filtros);
   }
 
-  buscarPorId(id: string): Gasto {
+  async buscarPorId(id: string): Promise<Gasto> {
     if (!id || id.trim() === '') {
       const error = new Error('ID do gasto é obrigatório.');
       (error as any).status = 400;
       throw error;
     }
 
-    const gasto = this.gastoRepository.buscarPorId(id);
+    const gasto = await this.gastoRepository.buscarPorId(id);
     if (!gasto) {
       const error = new Error('Gasto não encontrado.');
       (error as any).status = 404;
@@ -26,7 +26,7 @@ export class ConsultarGastosService {
     return gasto;
   }
 
-  listarCategorias(): string[] {
-    return this.gastoRepository.listarCategorias();
+  async listarCategorias(): Promise<string[]> {
+    return await this.gastoRepository.listarCategorias();
   }
 }

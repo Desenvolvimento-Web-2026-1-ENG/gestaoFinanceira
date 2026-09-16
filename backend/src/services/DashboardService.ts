@@ -4,12 +4,12 @@ import { DashboardResumoDTO } from './dtos/GastoDTOs.js';
 export class DashboardService {
   constructor(private gastoRepository: IGastoRepository) {}
 
-  obterResumo(mesParam?: string, anoParam?: string): DashboardResumoDTO {
+  async obterResumo(mesParam?: string, anoParam?: string): Promise<DashboardResumoDTO> {
     const hoje = new Date();
     const ano = anoParam || hoje.getFullYear().toString();
     const mes = mesParam ? mesParam.padStart(2, '0') : (hoje.getMonth() + 1).toString().padStart(2, '0');
 
-    const todosGastos = this.gastoRepository.listar({ mes, ano });
+    const todosGastos = await this.gastoRepository.listar({ mes, ano });
 
     let totalGasto = 0;
     const totalPorCategoria: Record<string, number> = {};

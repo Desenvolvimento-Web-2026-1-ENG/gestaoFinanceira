@@ -43,12 +43,12 @@ const gastos: Gasto[] = [
 ];
 
 export class GastoRepositoryInMemory implements IGastoRepository {
-  criar(gasto: Gasto): Gasto {
+  async criar(gasto: Gasto): Promise<Gasto> {
     gastos.push(gasto);
     return gasto;
   }
 
-  listar(filtros?: FiltrosGasto): Gasto[] {
+  async listar(filtros?: FiltrosGasto): Promise<Gasto[]> {
     let resultado = [...gastos];
 
     if (filtros) {
@@ -76,12 +76,12 @@ export class GastoRepositoryInMemory implements IGastoRepository {
     return resultado;
   }
 
-  buscarPorId(id: string): Gasto | null {
+  async buscarPorId(id: string): Promise<Gasto | null> {
     const gasto = gastos.find(g => g.id === id);
     return gasto || null;
   }
 
-  atualizar(id: string, dados: Partial<Omit<Gasto, 'id' | 'criadoEm'>>): Gasto | null {
+  async atualizar(id: string, dados: Partial<Omit<Gasto, 'id' | 'criadoEm'>>): Promise<Gasto | null> {
     const index = gastos.findIndex(g => g.id === id);
     if (index === -1) return null;
 
@@ -102,7 +102,7 @@ export class GastoRepositoryInMemory implements IGastoRepository {
     return gastoAtualizado;
   }
 
-  excluir(id: string): boolean {
+  async excluir(id: string): Promise<boolean> {
     const index = gastos.findIndex(g => g.id === id);
     if (index === -1) return false;
 
@@ -110,7 +110,7 @@ export class GastoRepositoryInMemory implements IGastoRepository {
     return true;
   }
 
-  listarCategorias(): string[] {
+  async listarCategorias(): Promise<string[]> {
     return CATEGORIAS_PADRAO;
   }
 }

@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class RegistrarGastoService {
   constructor(private gastoRepository: IGastoRepository) {}
 
-  registrar(dados: CriarGastoDTO): Gasto {
+  async registrar(dados: CriarGastoDTO): Promise<Gasto> {
     const erros: string[] = [];
 
     // Validação dos campos obrigatórios
@@ -53,6 +53,6 @@ export class RegistrarGastoService {
       criadoEm: new Date().toISOString(),
     };
 
-    return this.gastoRepository.criar(novoGasto);
+    return await this.gastoRepository.criar(novoGasto);
   }
 }

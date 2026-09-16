@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import gastosRoutes from './routes/gastos.routes.js';
 import { swaggerDocument } from './docs/swagger.js';
@@ -6,6 +7,13 @@ import { swaggerDocument } from './docs/swagger.js';
 const app = express();
 
 const PORT = process.env.PORT || 3000;
+
+app.use(
+  cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  })
+);
 
 app.use(express.json());
 

@@ -7,10 +7,10 @@ export interface FiltrosGasto {
 }
 
 export interface IGastoRepository {
-  criar(gasto: Gasto): Gasto;
-  listar(filtros?: FiltrosGasto): Gasto[];
-  buscarPorId(id: string): Gasto | null;
-  atualizar(id: string, dados: Partial<Omit<Gasto, 'id' | 'criadoEm'>>): Gasto | null;
-  excluir(id: string): boolean;
-  listarCategorias(): string[];
+  criar(gasto: Gasto): Promise<Gasto>;
+  listar(filtros?: FiltrosGasto): Promise<Gasto[]>;
+  buscarPorId(id: string): Promise<Gasto | null>;
+  atualizar(id: string, dados: Partial<Omit<Gasto, 'id' | 'criadoEm'>>): Promise<Gasto | null>;
+  excluir(id: string): Promise<boolean>;
+  listarCategorias(): Promise<string[]>;
 }
