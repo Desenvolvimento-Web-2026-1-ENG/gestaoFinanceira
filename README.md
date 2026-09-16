@@ -157,14 +157,21 @@ Abaixo estão os endpoints disponíveis no Back-end (`http://localhost:3000/api/
 
 ---
 
-## 📱 8. Wireframes
+## 📱 8. Guia de Telas e Wireframes
 
-A interface React.js foi desenvolvida com base nos Wireframes iniciais do projeto. A documentação completa e o relacionamento tela-endpoint estão registrados no documento:
-👉 **[`docs/WIREFRAMES.md`]([./docs/WIREFRAMES.md](https://github.com/Desenvolvimento-Web-2026-1-ENG/gestaoFinanceira/tree/main/docs/WIreframes))**
+A interface React.js foi desenvolvida com base nos Wireframes iniciais do projeto. As screenshots das principais interfaces, a documentação completa e o relacionamento tela-endpoint estão registrados na pasta:
+👉 **[Acessar Guia de Telas](https://github.com/Desenvolvimento-Web-2026-1-ENG/gestaoFinanceira/tree/main/docs/WIreframes)**
 
 ---
 
-## 📝 9. Autor e Licença
+## 🚀 9. Entrega Final P2 (Link da Release)
+
+A versão oficial para a avaliação da P2 pode ser acessada no link abaixo:
+👉 **[Acessar Release v2.0.0-p2](https://github.com/Desenvolvimento-Web-2026-1-ENG/gestaoFinanceira/releases/tag/v2.0.0-p2)**
+
+---
+
+## 📝 10. Autor e Licença
 
 **Autor:** Isaque
 **Licença:** MIT
